@@ -13,7 +13,7 @@ componentDidMount(){
   render() {  
     return (
       <View style={styles.container}>
-        <Text>Loading...</Text>
+        <Text>{'Loading...\n'}</Text>
         <ActivityIndicator size='large'></ActivityIndicator>
       </View>
     );

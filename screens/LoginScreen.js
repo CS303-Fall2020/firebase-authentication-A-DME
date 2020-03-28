@@ -4,15 +4,17 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
+import {globalStyles} from '../styles/global'
 import * as firebase from 'firebase';
 
 export default class LoginScreen extends Component {
   state = {
     email: '',
     password: '',
-    errorMessage: null
+    // errorMessage: null
   };
 
   handleLogin = () => {
@@ -21,39 +23,46 @@ export default class LoginScreen extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .catch(err => this.setState({ errorMessage: err.message }));
+      .catch(err => {Alert.alert(err.message)});
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.hello}>{'Hello again\nWelcome back'}</Text>
+      <View style={globalStyles.container}>
+        <Text style={globalStyles.hello}>{'Hello again\nWelcome back'}</Text>
 
-        <View style={styles.errmsg}>
+        {/* <View style={globalStyles.errmsg}>
           {this.state.errorMessage && (
-            <Text style={styles.err}>{this.state.errorMessage}</Text>
+            <Text style={globalStyles.err}>{this.state.errorMessage}</Text>
           )}
-        </View>
-        <View style={styles.form}>
-          <Text style={styles.iTitle}>Email</Text>
+        </View> */}
+        <View style={globalStyles.form}>
+          <Text style={globalStyles.iTitle}>Email</Text>
           <TextInput
-            style={styles.input}
+            style={globalStyles.input}
             autoCapitalize='none'
             onChangeText={email => this.setState({ email })}
             value={this.state.email}
+            keyboardType='email-address'
+            autoCorrect={false}
           ></TextInput>
         </View>
-        <View style={{ marginTop: 32 }}>
-          <Text style={styles.iTitle}>Password</Text>
+        <View style={{ marginTop: 32,marginHorizontal:30 }}>
+          <Text style={globalStyles.iTitle}>Password</Text>
           <TextInput
-            style={styles.input}
+            style={globalStyles.input}
             autoCapitalize='none'
             onChangeText={password => this.setState({ password })}
             value={this.state.password}
+            secureTextEntry={true}
+            autoCorrect={false}
           ></TextInput>
         </View>
-        <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
+        <TouchableOpacity style={globalStyles.button} onPress={this.handleLogin}>
           <Text style={{ color: '#fff', fontWeight: '500' }}>SignIn</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={globalStyles.button} onPress={()=>this.props.navigation.navigate('Forget')}>
+          <Text style={{ color: '#fff', fontWeight: '500' }}>Forgot Password?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ alignSelf: 'center', marginTop: 32 }} onPress={()=>this.props.navigation.navigate('Register')}>
           <Text style={{ color: '#414959', fontSize: 13 }}>
@@ -84,7 +93,7 @@ const styles = StyleSheet.create({
   },
   err: {
     color: '#E9446A',
-    fontSize: 13,
+    fontSize: 25,
     fontWeight: '600',
     textAlign: 'center'
   },

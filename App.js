@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen'
 import LoadingScreen from './screens/LoadingScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import ForgetScreen from './screens/ForgetScreen'
 
 
 import * as firebase from 'firebase'
@@ -24,26 +25,36 @@ const AppStack = createStackNavigator({
   Home:HomeScreen,
 })
 
-const screens={
-  Login:{
-    screen :LoginScreen,
-    navigationOptions:  {
+// const screens={
+//   Login:{
+//     screen :LoginScreen,
+//     navigationOptions:  {
       
-      headerLeft: null
-  },
-  Register:{
-    screen:RegisterScreen,
-    navigationOptions:  {
+//       headerLeft: null
+//   },
+//   Register:{
+//     screen:RegisterScreen,
+//     navigationOptions:  {
       
-      headerLeft: null
-  }
-  }
-  }
-}
+//       headerLeft: null
+//   }
+//   }
+//   }
+// }
 
   const AuthStack =createStackNavigator({
-    Login:LoginScreen,
-    Register:RegisterScreen,
+    Login:{
+      screen:LoginScreen
+    },
+    Register:{screen:RegisterScreen,
+    navigationOptions:{
+      headerLeft:null
+    }},
+    Forget:{screen:ForgetScreen,
+    navigationOptions:{
+      headerLeft:null
+    }},
+    
     
   })
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet  ,TouchableOpacity} from 'react-native';
+import {globalStyles} from '../styles/global'
 import * as firebase from 'firebase'
 
 export default class HomeScreen extends Component {
@@ -22,11 +23,11 @@ export default class HomeScreen extends Component {
  
   render() {
     return (
-      <View style={styles.container}>
-        <Text>{this.state.email}</Text>
-        <Text> نورت بيتك ياخويا...اطلع برا بقا</Text>
-<TouchableOpacity style={{marginTop:32}} onPress={this.signOutUser}>
-  <Text>Logout</Text>
+      <View style={globalStyles.container2}>
+        <Text style={{marginTop:50,fontSize:30}}>{this.state.email}</Text>
+        <Text style={{marginTop:32,fontSize:30}}> نورت بيتك ياخويا...اطلع برا بقا</Text>
+<TouchableOpacity style={globalStyles.button2} onPress={this.signOutUser}>
+  <Text style={{textDecorationColor:'white'}}>Logout</Text>
 </TouchableOpacity>
 
       </View>
@@ -34,9 +35,4 @@ export default class HomeScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
+
